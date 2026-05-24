@@ -1,0 +1,6 @@
+flask
+gunicorn
+requests
+duckduckgo-search
+pollinations-api
+beautifulsoup4
