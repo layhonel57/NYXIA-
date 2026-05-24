@@ -1,4 +1,0 @@
-flask
-requests
-duckduckgo-search
-pollinations-api
