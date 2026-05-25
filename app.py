@@ -25,8 +25,6 @@ def guardar_memoria(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 # ========== FUNCIONES DE IA (Groq opcional) ==========
-import os
-import requests
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")  # Lee desde variable de entorno
 
