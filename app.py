@@ -28,10 +28,10 @@ def guardar_memoria(data):
 GROQ_API_KEY = os.getenv("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 ")
 
 def consultar_groq(mensajes):
-    if not GROQ_API_KEY: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
+    if not GROQ_API_KEY
         return "⚙️ Modo local: no hay API key de Groq. Las conversaciones simuladas funcionan, pero para respuestas avanzadas configura GROQ_API_KEY."
     url = "https://api.groq.com/openai/v1/chat/completions"
-    headers = {"Authorization": f"Bearer { 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 }", "Content-Type": "application/json"}
+    headers = {"Authorization": f"Bearer { }", "Content-Type": "application/json"}
     payload = {"model": "llama-3.1-70b-versatile", "messages": mensajes, "max_tokens": 500}
     try:
         r = requests.post(url, headers=headers, json=payload, timeout=20)
