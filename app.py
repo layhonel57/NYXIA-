@@ -32,7 +32,7 @@ def consultar_groq(mensajes):
         return "⚙️ Modo local: no hay API key de Groq. Las conversaciones simuladas funcionan, pero para respuestas avanzadas configura GROQ_API_KEY."
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {"Authorization": f"Bearer { }", "Content-Type": "application/json"}
-    payload = {"model": "llama-3.1-70b-versatile", "messages": mensajes, "max_tokens": 500}
+    payload = {"model": "llama-3.3-70b-versatile", "messages": mensajes, "max_tokens": 500}
     try:
         r = requests.post(url, headers=headers, json=payload, timeout=20)
         if r.status_code == 200:
