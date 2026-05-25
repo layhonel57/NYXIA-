@@ -25,7 +25,7 @@ def guardar_memoria(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 # ========== FUNCIONES DE IA (Groq opcional) ==========
-GROQ_API_KEY = os.getenv("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 ")
+GROQ_API_KEY = os.getenv"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"
 
 def consultar_groq(mensajes):
     if not GROQ_API_KEY
