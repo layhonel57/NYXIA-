@@ -25,20 +25,31 @@ def guardar_memoria(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 # ========== FUNCIONES DE IA (Groq opcional) ==========
-GROQ_API_KEY = os.getenv"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"
+import os
+import requests
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")  # Lee desde variable de entorno
 
 def consultar_groq(mensajes):
-    if not GROQ_API_KEY
+    if not GROQ_API_KEY:
         return "⚙️ Modo local: no hay API key de Groq. Las conversaciones simuladas funcionan, pero para respuestas avanzadas configura GROQ_API_KEY."
+    
     url = "https://api.groq.com/openai/v1/chat/completions"
-    headers = {"Authorization": f"Bearer { }", "Content-Type": "application/json"}
-    payload = {"model": "llama-3.3-70b-versatile", "messages": mensajes, "max_tokens": 500}
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "model": "llama-3.3-70b-versatile",
+        "messages": mensajes,
+        "max_tokens": 500
+    }
     try:
         r = requests.post(url, headers=headers, json=payload, timeout=20)
         if r.status_code == 200:
             return r.json()["choices"][0]["message"]["content"]
         else:
-            return f"Error Groq: {r.status_code}"
+            return f"Error Groq: {r.status_code} - {r.text}"
     except Exception as e:
         return f"Error: {str(e)}"
 
