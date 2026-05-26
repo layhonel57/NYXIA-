@@ -1,0 +1,9 @@
+run = "python app.py"
+language = "python3"
+
+[packager]
+language = "python3"
+
+[packager.features]
+packageSearch = true
+guessImports = true
