@@ -25,12 +25,17 @@ def guardar_memoria(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 # ========== FUNCIONES DE IA (Groq opcional) ==========
+# Necesitas instalar: pip install httpx
+import os
+import httpx
+import asyncio
+from typing import List, Dict
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")  # Lee desde variable de entorno
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 
-def consultar_groq(mensajes):
+async def consultar_groq_async(mensajes: List[Dict[str, str]]) -> str:
     if not GROQ_API_KEY:
-        return "⚙️ Modo local: no hay API key de Groq. Las conversaciones simuladas funcionan, pero para respuestas avanzadas configura GROQ_API_KEY."
+        return "⚙️ Modo local: no hay API key de Groq..."
     
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {
@@ -42,14 +47,20 @@ def consultar_groq(mensajes):
         "messages": mensajes,
         "max_tokens": 500
     }
-    try:
-        r = requests.post(url, headers=headers, json=payload, timeout=20)
-        if r.status_code == 200:
-            return r.json()["choices"][0]["message"]["content"]
-        else:
-            return f"Error Groq: {r.status_code} - {r.text}"
-    except Exception as e:
-        return f"Error: {str(e)}"
+    
+    # httpx.AsyncClient permite hacer múltiples llamadas a la vez sin bloquear
+    async with httpx.AsyncClient(timeout=20.0) as client:
+        try:
+            response = await client.post(url, headers=headers, json=payload)
+            response.raise_for_status()
+            return response.json()["choices"][0]["message"]["content"]
+        except httpx.HTTPStatusError as e:
+            return f"Error Groq: {e.response.status_code} - {e.response.text}"
+        except Exception as e:
+            return f"Error: {str(e)}"
+
+# Para probarla: asyncio.run(consultar_groq_async([{"role": "user", "content": "Hola"}]))
+
 
 # ========== BUSCAR WEB (DuckDuckGo) ==========
 def buscar_web(query):
