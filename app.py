@@ -25,7 +25,7 @@ def guardar_memoria(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 # ========== FUNCIONES DE IA (Groq opcional) ==========
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_API_KEY = os.getenv(""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"")
 
 async def consultar_groq_async(mensajes: List[Dict[str, str]]) -> str:
     if not GROQ_API_KEY:
@@ -38,7 +38,7 @@ async def consultar_groq_async(mensajes: List[Dict[str, str]]) -> str:
     }
     payload = {
         "model": "llama-3.3-70b-versatile",
-        "messages": mensajes,
+        "messages": GROQ_API_KEY
         "max_tokens": 500
     }
     
