@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Entorno
+.env
+.venv/
+venv/
+env/
+
+# Memoria (opcional, si no quieres versionarla)
+# memoria.json
+
+# Archivos generados
+static/generated/*.png
+static/generated/*.jpg
+static/generated/*.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Replit
+.replit
