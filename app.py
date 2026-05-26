@@ -25,12 +25,6 @@ def guardar_memoria(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 # ========== FUNCIONES DE IA (Groq opcional) ==========
-# Necesitas instalar: pip install httpx
-import os
-import httpx
-import asyncio
-from typing import List, Dict
-
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 
 async def consultar_groq_async(mensajes: List[Dict[str, str]]) -> str:
